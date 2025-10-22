@@ -15,9 +15,16 @@ const siteMetaSchema = z.object({
   icon: z.string().default('/icon.svg'),
 });
 
+const pageConfigSchema = z.object({
+  id: z.string(),
+  siteMeta: siteMetaSchema,
+});
+
 const configSchema = z.object({
   baseUrl: z.string().url(),
   pageId: z.string(),
+  pageIds: z.array(z.string()).min(1),
+  pages: z.array(pageConfigSchema).min(1),
   siteMeta: siteMetaSchema,
   isPlaceholder: z.boolean().default(false),
   isEditThisPage: z.boolean().default(false),
@@ -133,6 +140,15 @@ async function fetchSiteMeta(baseUrl: string, pageId: string) {
   }
 }
 
+function parsePageIds(rawValue: string): string[] {
+  const parsed = rawValue
+    .split(/[,\s]+/)
+    .map((id) => id.trim())
+    .filter((id) => id.length > 0);
+
+  return Array.from(new Set(parsed));
+}
+
 async function generateConfig() {
   try {
     console.log('[env] [generate-config]');
@@ -145,7 +161,14 @@ async function generateConfig() {
     }
 
     const baseUrl = getRequiredEnvVar('UPTIME_KUMA_BASE_URL');
-    const pageId = getRequiredEnvVar('PAGE_ID');
+    const rawPageIds = getRequiredEnvVar('PAGE_ID');
+    const pageIds = parsePageIds(rawPageIds);
+
+    if (pageIds.length === 0) {
+      throw new Error('PAGE_ID must contain at least one status page identifier');
+    }
+
+    const defaultPageId = pageIds[0];
 
     // 获取并验证配置项
     try {
@@ -160,12 +183,30 @@ async function generateConfig() {
     console.log(`[env] - isEditThisPage: ${isEditThisPage}`);
     console.log(`[env] - isShowStarButton: ${isShowStarButton}`);
 
-    const siteMeta = await fetchSiteMeta(baseUrl, pageId);
+    const pageConfigEntries = [] as Array<{ id: string; siteMeta: z.infer<typeof siteMetaSchema> }>;
+
+    for (const id of pageIds) {
+      try {
+        const siteMeta = await fetchSiteMeta(baseUrl, id);
+        pageConfigEntries.push({ id, siteMeta });
+      } catch (error) {
+        console.error(`Failed to fetch site meta for page "${id}":`, error);
+        pageConfigEntries.push({ id, siteMeta: siteMetaSchema.parse({}) });
+      }
+    }
+
+    const defaultSiteMeta = pageConfigEntries.find((entry) => entry.id === defaultPageId)?.siteMeta;
+
+    if (!defaultSiteMeta) {
+      throw new Error(`Unable to resolve site metadata for default page "${defaultPageId}"`);
+    }
 
     const config = configSchema.parse({
       baseUrl,
-      pageId,
-      siteMeta,
+      pageId: defaultPageId,
+      pageIds,
+      pages: pageConfigEntries,
+      siteMeta: defaultSiteMeta,
       isPlaceholder: false,
       isEditThisPage,
       isShowStarButton,
