@@ -3,6 +3,7 @@
 import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/basic/navbar';
 import { PageTabs } from '@/components/basic/page-tabs';
+import { usePageConfig } from '@/components/context/PageConfigContext';
 import type { SiteConfig } from '@/types/config';
 import type { PageTabMeta } from '@/types/page';
 
@@ -13,11 +14,15 @@ interface AppShellProps {
 }
 
 export function AppShell({ children, footerConfig, pageTabs }: AppShellProps) {
+  const { pageId } = usePageConfig();
+
   return (
     <div className="relative flex flex-col min-h-screen">
       <Navbar />
       <PageTabs tabs={pageTabs} />
-      <main className="container mx-auto max-w-7xl pt-4 px-6 grow">{children}</main>
+      <main key={pageId} className="container mx-auto max-w-7xl pt-4 px-6 grow fade-in-soft">
+        {children}
+      </main>
       <Footer config={footerConfig} />
     </div>
   );

@@ -1,7 +1,7 @@
 'use client';
 
 import type { Config } from '@/types/config';
-import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 interface PageConfigContextValue {
   config: Config;
@@ -30,6 +30,10 @@ export function PageConfigProvider({ initialConfig, children }: PageConfigProvid
       return nextConfig;
     });
   }, []);
+
+  useEffect(() => {
+    setConfig(initialConfig);
+  }, [initialConfig, setConfig]);
 
   const value = useMemo<PageConfigContextValue>(() => ({ config, setConfig }), [config, setConfig]);
 
