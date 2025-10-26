@@ -2,7 +2,7 @@ import { Alert } from '@/components/ui/Alert';
 import type { Incident } from '@/types/monitor';
 import { useFormatter, useTranslations } from 'next-intl';
 import React, { useMemo } from 'react';
-import { dateStringToTimestamp, extractSentence } from '../utils/format';
+import { dateStringToTimestamp, extractSentence, timezoneOffsetToMs } from '../utils/format';
 
 // Workaround for https://github.com/markdown-it/markdown-it/issues/1082
 const MarkdownIt = require('markdown-it');
@@ -21,6 +21,7 @@ function IncidentMarkdownAlert({ incident }: { incident: Incident }) {
   const dateTimeFormat: Intl.DateTimeFormatOptions = {
     dateStyle: 'medium',
     timeStyle: 'short',
+    timeZone: 'UTC',
   };
 
   let { style, title, content, createdDate, lastUpdatedDate } = incident;
@@ -81,7 +82,10 @@ function IncidentMarkdownAlert({ incident }: { incident: Incident }) {
         )}
         <span className="text-sm text-gray-400 dark:text-gray-500">
           {t('createdAt', {
-            time: format.dateTime(dateStringToTimestamp(createdDate), dateTimeFormat),
+            time: format.dateTime(
+              dateStringToTimestamp(createdDate) + timezoneOffsetToMs('+00:00'),
+              dateTimeFormat,
+            ),
           })}
         </span>
       </div>
