@@ -20,5 +20,5 @@
 }
 
 .fade-in-soft {
-  animation: fade-in-soft 0.22s ease-out;
+  animation: fade-in-soft 0.22s ease-out both;
 }
