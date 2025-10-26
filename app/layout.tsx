@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description || 'Kuma Mieru',
   icons: {
-    icon: siteConfig.icon,
+    icon: siteConfig.iconCandidates,
   },
   generator: `https://github.com/Alice39s/kuma-mieru v${packageJson.version}`,
   formatDetection: {

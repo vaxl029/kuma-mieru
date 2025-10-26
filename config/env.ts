@@ -7,6 +7,7 @@ const siteMetaSchema = z.object({
   title: z.string(),
   description: z.string(),
   icon: z.string(),
+  iconCandidates: z.array(z.string()).min(1),
 });
 
 const configSchema = z.object({

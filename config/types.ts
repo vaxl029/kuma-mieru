@@ -4,6 +4,7 @@ export interface GeneratedPageConfig {
     title: string;
     description: string;
     icon: string;
+    iconCandidates: string[];
   };
 }
 
