@@ -2,7 +2,7 @@ import { PageConfigProvider } from '@/components/context/PageConfigContext';
 import { AppShell } from '@/components/layout/AppShell';
 import { MonitorDetailContent } from '@/components/monitor/MonitorDetailContent';
 import { getConfig } from '@/config/api';
-import { getGlobalConfig } from '@/services/config.server';
+import { getGlobalConfig, getPageTabsMetadata } from '@/services/config.server';
 import { notFound } from 'next/navigation';
 
 export default async function MonitorDetailPage({
@@ -21,11 +21,14 @@ export default async function MonitorDetailPage({
     notFound();
   }
 
-  const { config: footerConfig } = await getGlobalConfig(pageConfig.pageId);
+  const [{ config: footerConfig }, pageTabs] = await Promise.all([
+    getGlobalConfig(pageConfig.pageId),
+    getPageTabsMetadata(),
+  ]);
 
   return (
     <PageConfigProvider initialConfig={pageConfig}>
-      <AppShell footerConfig={footerConfig}>
+      <AppShell footerConfig={footerConfig} pageTabs={pageTabs}>
         <MonitorDetailContent monitorId={monitorId} />
       </AppShell>
     </PageConfigProvider>

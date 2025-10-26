@@ -18,6 +18,10 @@ function IncidentMarkdownAlert({ incident }: { incident: Incident }) {
   const t = useTranslations('alert');
   const format = useFormatter();
   const now = Date.now();
+  const dateTimeFormat: Intl.DateTimeFormatOptions = {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  };
 
   let { style, title, content, createdDate, lastUpdatedDate } = incident;
 
@@ -77,7 +81,7 @@ function IncidentMarkdownAlert({ incident }: { incident: Incident }) {
         )}
         <span className="text-sm text-gray-400 dark:text-gray-500">
           {t('createdAt', {
-            time: format.dateTime(dateStringToTimestamp(createdDate), 'normal'),
+            time: format.dateTime(dateStringToTimestamp(createdDate), dateTimeFormat),
           })}
         </span>
       </div>
