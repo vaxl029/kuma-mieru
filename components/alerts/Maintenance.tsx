@@ -6,6 +6,7 @@ import { Card, CardBody, Chip, Progress } from '@heroui/react';
 import clsx from 'clsx';
 import { AlertCircle, Calendar, Clock, Timer, Wrench } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
+import type { DateTimeFormatOptions } from 'next-intl';
 import { useEffect } from 'react';
 import { dateStringToTimestamp, timezoneOffsetToMs } from '../utils/format';
 import { getMarkdownClasses, useMarkdown } from '../utils/markdown';
@@ -14,7 +15,7 @@ function MaintenanceAlert({ maintenance }: { maintenance: Maintenance }) {
   const t = useTranslations('maintenance');
   const format = useFormatter();
   const now = Date.now();
-  const dateTimeFormat: Intl.DateTimeFormatOptions = {
+  const dateTimeFormat: DateTimeFormatOptions = {
     dateStyle: 'medium',
     timeStyle: 'short',
     timeZone: 'UTC',

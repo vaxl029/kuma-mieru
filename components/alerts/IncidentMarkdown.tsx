@@ -1,6 +1,7 @@
 import { Alert } from '@/components/ui/Alert';
 import type { Incident } from '@/types/monitor';
 import { useFormatter, useTranslations } from 'next-intl';
+import type { DateTimeFormatOptions } from 'next-intl';
 import React, { useMemo } from 'react';
 import { dateStringToTimestamp, extractSentence, timezoneOffsetToMs } from '../utils/format';
 
@@ -18,7 +19,7 @@ function IncidentMarkdownAlert({ incident }: { incident: Incident }) {
   const t = useTranslations('alert');
   const format = useFormatter();
   const now = Date.now();
-  const dateTimeFormat: Intl.DateTimeFormatOptions = {
+  const dateTimeFormat: DateTimeFormatOptions = {
     dateStyle: 'medium',
     timeStyle: 'short',
     timeZone: 'UTC',

@@ -148,7 +148,7 @@ export const getPageTabsMetadata = cache(async (): Promise<PageTabMeta[]> => {
     }),
   );
 
-  return tabs.filter((tab): tab is PageTabMeta => tab !== null);
+  return tabs.filter((tab) => tab !== null) as PageTabMeta[];
 });
 
 export const getGlobalConfig = cache(async (pageId?: string): Promise<GlobalConfig> => {
