@@ -9,10 +9,12 @@ export default async function MonitorDetailPage({
   params,
   searchParams,
 }: {
-  params: { id: string };
-  searchParams: { pageId?: string };
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ pageId?: string }>;
 }) {
-  const requestedPageId = searchParams.pageId;
+  const { id: monitorId } = await params;
+  const resolvedSearchParams = await searchParams;
+  const requestedPageId = resolvedSearchParams?.pageId;
   const pageConfig = requestedPageId ? getConfig(requestedPageId) : getConfig();
 
   if (!pageConfig) {
@@ -24,7 +26,7 @@ export default async function MonitorDetailPage({
   return (
     <PageConfigProvider initialConfig={pageConfig}>
       <AppShell footerConfig={footerConfig}>
-        <MonitorDetailContent monitorId={params.id} />
+        <MonitorDetailContent monitorId={monitorId} />
       </AppShell>
     </PageConfigProvider>
   );
