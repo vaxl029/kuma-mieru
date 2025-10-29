@@ -31,9 +31,10 @@ declare module '@react-types/shared' {
 
 export function Providers({ children, themeProps, locale, messages }: ProvidersProps) {
   const router = useRouter();
+  const timeZone = process.env.TIMEZONE || 'UTC';
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider locale={locale} messages={messages} timeZone={timeZone}>
       <HeroUIProvider navigate={router.push}>
         <NextThemesProvider {...themeProps}>
           <NodeSearchProvider>{children}</NodeSearchProvider>

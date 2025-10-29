@@ -14,10 +14,10 @@ import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Kuma Mieru',
-    template: siteConfig.name ? `%s - ${siteConfig.name}` : '%s - Kuma Mieru',
+    default: 'Uptime.Tips',
+    template: siteConfig.name ? `%s - ${siteConfig.name}` : '%s - Uptime.Tips',
   },
-  description: siteConfig.description || 'Kuma Mieru',
+  description: siteConfig.description || 'Uptime.Tips',
   icons: {
     icon: siteConfig.iconCandidates,
   },
@@ -35,6 +35,8 @@ export const viewport: Viewport = {
     { media: '(prefers-color-scheme: dark)', color: 'black' },
   ],
 };
+
+export const dynamic = 'force-dynamic';
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Parallel fetch i18n data and global config to reduce waiting time

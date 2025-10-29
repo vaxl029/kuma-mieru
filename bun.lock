@@ -8,7 +8,7 @@
         "@heroui/theme": "^2.4.23",
         "@mdx-js/mdx": "^3.1.1",
         "@mdx-js/react": "^3.1.1",
-        "@next/bundle-analyzer": "^15.5.6",
+        "@next/bundle-analyzer": "^16.0.1",
         "@opennextjs/cloudflare": "^1.11.0",
         "@react-aria/ssr": "3.9.7",
         "@react-aria/visually-hidden": "3.8.20",
@@ -41,7 +41,7 @@
       },
       "devDependencies": {
         "@biomejs/biome": "1.9.4",
-        "@next/eslint-plugin-next": "15.3.0",
+        "@next/eslint-plugin-next": "^16.0.1",
         "@react-types/shared": "3.28.0",
         "@tailwindcss/typography": "^0.5.19",
         "@types/node": "22.13.14",
@@ -554,11 +554,11 @@
 
     "@mdx-js/react": ["@mdx-js/react@3.1.1", "", { "dependencies": { "@types/mdx": "^2.0.0" }, "peerDependencies": { "@types/react": ">=16", "react": ">=16" } }, "sha512-f++rKLQgUVYDAtECQ6fn/is15GkEH9+nZPM3MS0RcxVqoTfawHvDlSCH7JbMhAM6uJ32v3eXLvLmLvjGu7PTQw=="],
 
-    "@next/bundle-analyzer": ["@next/bundle-analyzer@15.5.6", "", { "dependencies": { "webpack-bundle-analyzer": "4.10.1" } }, "sha512-IHeyk2s9/fVDAGDLNbBkCSG8XBabhuMajiaJggjsg4GyFIswh78DzLo5Nl5th8QTs3U/teYeczvfeV9w1Tx3qA=="],
+    "@next/bundle-analyzer": ["@next/bundle-analyzer@16.0.1", "", { "dependencies": { "webpack-bundle-analyzer": "4.10.1" } }, "sha512-ds2XBC7hred9g9T16DYXp4llImGf9gBSsfY5k3bklizOtHeo+53EXjKm3AliS/fMTjYfRrv8usdL2wVZa1GIkw=="],
 
     "@next/env": ["@next/env@16.0.0", "", {}, "sha512-s5j2iFGp38QsG1LWRQaE2iUY3h1jc014/melHFfLdrsMJPqxqDQwWNwyQTcNoUSGZlCVZuM7t7JDMmSyRilsnA=="],
 
-    "@next/eslint-plugin-next": ["@next/eslint-plugin-next@15.3.0", "", { "dependencies": { "fast-glob": "3.3.1" } }, "sha512-511UUcpWw5GWTyKfzW58U2F/bYJyjLE9e3SlnGK/zSXq7RqLlqFO8B9bitJjumLpj317fycC96KZ2RZsjGNfBw=="],
+    "@next/eslint-plugin-next": ["@next/eslint-plugin-next@16.0.1", "", { "dependencies": { "fast-glob": "3.3.1" } }, "sha512-g4Cqmv/gyFEXNeVB2HkqDlYKfy+YrlM2k8AVIO/YQVEPfhVruH1VA99uT1zELLnPLIeOnx8IZ6Ddso0asfTIdw=="],
 
     "@next/swc-darwin-arm64": ["@next/swc-darwin-arm64@16.0.0", "", { "os": "darwin", "cpu": "arm64" }, "sha512-/CntqDCnk5w2qIwMiF0a9r6+9qunZzFmU0cBX4T82LOflE72zzH6gnOjCwUXYKOBlQi8OpP/rMj8cBIr18x4TA=="],
 

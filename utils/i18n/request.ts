@@ -4,8 +4,10 @@ import { getUserLocale } from './locale';
 
 export default getRequestConfig(async () => {
   const locale = (await getUserLocale()) || defaultLocale;
+  const timeZone = process.env.TIMEZONE || 'UTC';
   return {
     locale,
+    timeZone,
     formats: {
       dateTime: {
         normal: {

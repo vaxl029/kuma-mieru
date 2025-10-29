@@ -13,7 +13,6 @@ import {
 } from '@heroui/react';
 import { link as linkStyles } from '@heroui/theme';
 import clsx from 'clsx';
-import Image from 'next/image';
 import NextLink from 'next/link';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 
@@ -135,23 +134,12 @@ export const Navbar = () => {
   return (
     <HeroUINavbar maxWidth="xl" position="static">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href={homeHref}>
-            <Image
-              src={getIconUrl() || '/icon.svg'}
-              alt={`${resolvedTitle} logo`}
-              width={34}
-              height={34}
-            />
-            <p className="font-bold text-inherit">{resolvedTitle}</p>
-          </NextLink>
-        </NavbarBrand>
         <nav aria-label={t('navbar.main')}>
           <ul className="hidden lg:flex gap-4 justify-start ml-2">
             {siteConfig.navItems.map((item) => {
               const targetHref = item.href === '/' ? homeHref : item.href;
               return (
-                <li key={item.href}>
+                <li className="font-bold" key={item.href}>
                   <NextLink
                     className={clsx(
                       linkStyles({ color: 'foreground' }),
@@ -168,6 +156,11 @@ export const Navbar = () => {
             })}
           </ul>
         </nav>
+        <NavbarBrand className="gap-3 max-w-fit">
+          <NextLink className="flex justify-start items-center gap-1" href={homeHref}>
+            <p className="font-bold text-inherit">{resolvedTitle}</p>
+          </NextLink>
+        </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex basis-1/5 sm:basis-full" justify="end">
