@@ -70,6 +70,7 @@ const baseConfig = {
 
   images: {
     remotePatterns: getImageRemotePatterns(),
+    unoptimized: process.env.IMAGE_UNOPTIMIZED === 'true',
     formats: ['image/avif', 'image/webp'],
     dangerouslyAllowSVG: true,
   },

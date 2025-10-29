@@ -30,7 +30,7 @@ export function PageTabs({ tabs: providedTabs }: PageTabsProps) {
     const title = metaFromPreload?.title?.trim() || fallbackSiteMeta?.title?.trim() || id;
     const description =
       metaFromPreload?.description?.trim() || fallbackSiteMeta?.description?.trim();
-    const icon = resolveIconUrl(metaFromPreload?.icon || fallbackSiteMeta?.icon);
+    const icon = resolveIconUrl(metaFromPreload?.icon || fallbackSiteMeta?.icon, pageConfig.baseUrl);
 
     const href = id === pageConfig.defaultPageId ? '/' : `/${id}`;
     const isActive = pageConfig.pageId === id;
@@ -68,7 +68,7 @@ export function PageTabs({ tabs: providedTabs }: PageTabsProps) {
               </span>
               <span className="flex min-w-0 flex-col text-left">
                 <span className="truncate font-medium text-sm" title={title}>
-                  {title}
+                  {id === pageConfig.defaultPageId ? 'Home' : title}
                 </span>
                 {description ? (
                   <span className="truncate text-xs text-default-400" title={description}>

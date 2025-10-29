@@ -14,10 +14,10 @@ import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Kuma Mieru',
-    template: siteConfig.name ? `%s - ${siteConfig.name}` : '%s - Kuma Mieru',
+    default: 'Uptime.Tips',
+    template: siteConfig.name ? `%s - ${siteConfig.name}` : '%s - Uptime.Tips',
   },
-  description: siteConfig.description || 'Kuma Mieru',
+  description: siteConfig.description || 'Uptime.Tips',
   icons: {
     icon: siteConfig.iconCandidates,
   },
@@ -36,6 +36,8 @@ export const viewport: Viewport = {
   ],
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Parallel fetch i18n data and global config to reduce waiting time
   const [locale, messages, { config }] = await Promise.all([
@@ -48,7 +50,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html suppressHydrationWarning={true} lang={locale}>
-      <head />
+      <head>
+        {(process.env.USE_IMAGE_PROXY === 'true') && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: 'window.__USE_IMAGE_PROXY__=true;'
+            }}
+          />
+        )}
+      </head>
       <body
         className={clsx(
           'min-h-screen bg-background font-sans antialiased',
