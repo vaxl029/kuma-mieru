@@ -9,14 +9,13 @@ WORKDIR /app
 
 # 构建时固定的环境变量
 ENV NODE_ENV=production \
-    NEXT_TELEMETRY_DISABLED=1 \
-    UPTIME_KUMA_URLS= \
-    UPTIME_KUMA_BASE_URL=https://whimsical-sopapillas-78abba.netlify.app \
-    PAGE_ID=demo \
-    KUMA_MIERU_EDIT_THIS_PAGE=false \
-    KUMA_MIERU_SHOW_STAR_BUTTON=true \
-    KUMA_MIERU_TITLE="Uptime Kuma" \
-    KUMA_MIERU_DESCRIPTION="A beautiful and modern uptime monitoring dashboard" \
+  NEXT_TELEMETRY_DISABLED=1 \
+  UPTIME_KUMA_BASE_URL=https://whimsical-sopapillas-78abba.netlify.app \
+  PAGE_ID=demo \
+  FEATURE_EDIT_THIS_PAGE=false \
+    KUMA_MIERU_SHOW_STAR_BUTTON=false \
+    KUMA_MIERU_TITLE="Uptime.Tips" \
+    KUMA_MIERU_DESCRIPTION= \
     KUMA_MIERU_ICON="" \
     ALLOW_EMBEDDING=false
 
@@ -56,9 +55,9 @@ ARG UPTIME_KUMA_URLS=
 ARG UPTIME_KUMA_BASE_URL=https://whimsical-sopapillas-78abba.netlify.app
 ARG PAGE_ID=demo
 ARG KUMA_MIERU_EDIT_THIS_PAGE=false
-ARG KUMA_MIERU_SHOW_STAR_BUTTON=true
-ARG KUMA_MIERU_TITLE="Uptime Kuma"
-ARG KUMA_MIERU_DESCRIPTION="A beautiful and modern uptime monitoring dashboard"
+ARG KUMA_MIERU_SHOW_STAR_BUTTON=false
+ARG KUMA_MIERU_TITLE="Uptime.Tips"
+ARG KUMA_MIERU_DESCRIPTION=
 ARG KUMA_MIERU_ICON=
 ARG ALLOW_EMBEDDING=false
 ARG IS_DOCKER=true
