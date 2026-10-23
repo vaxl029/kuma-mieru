@@ -1,0 +1,6 @@
+[build]
+command = "bun run build"
+publish = ".next"
+
+[template.environment]
+UPTIME_KUMA_URLS = "Uptime Kuma status page URL(s), separate multiple URLs with |"
