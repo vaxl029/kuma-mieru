@@ -1,17 +1,8 @@
 /** @type {import('next').NextConfig} */
 import { readFileSync } from 'node:fs';
-import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import createNextIntlPlugin from 'next-intl/plugin';
 import bundleAnalyzer from '@next/bundle-analyzer';
-
-let __dirname;
-try {
-  const __filename = fileURLToPath(import.meta.url);
-  __dirname = dirname(__filename);
-} catch {
-  __dirname = process.cwd();
-}
 
 const defaultProtocols = ['https', 'http'];
 
@@ -63,7 +54,7 @@ const getImageRemotePatterns = () => {
         return normalized;
       }
     }
-  } catch (e) {
+  } catch {
     // Fallback to defaults below
   }
 
@@ -92,7 +83,7 @@ const baseConfig = {
   webpack: (config, { isServer, dev }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@': join(__dirname),
+      '@': import.meta.dirname,
     };
 
     if (!isServer && !dev) {
@@ -112,7 +103,7 @@ const baseConfig = {
       config.cache = {
         type: 'filesystem',
         buildDependencies: {
-          config: [__filename],
+          config: [import.meta.filename],
         },
       };
     }
@@ -202,7 +193,7 @@ if (process.env.CF_DEPLOYMENT) {
   config = {
     ...config,
     experimental: {
-      ...(config.experimental ?? {}),
+      ...config.experimental,
       runtime: 'edge',
     },
   };
