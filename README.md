@@ -41,6 +41,8 @@ Kuma Mieru 是一款基于 Next.js 16、TypeScript 和 Recharts 构建的第三�
       - [2. 导入到 Vercel](#2-导入到-vercel)
       - [3. 配置环境变量](#3-配置环境变量)
       - [4. 更新仓库](#4-更新仓库)
+    - [使用 Netlify 部署](#使用-netlify-部署)
+    - [使用 EdgeOne Pages 部署](#使用-edgeone-pages-部署)
     - [使用 Cloudflare Workers 部署](#使用-cloudflare-workers-部署)
     - [本地部署](#本地部署)
   - [Docker 部署 :whale: (Beta)](#docker-部署-whale-beta)
@@ -114,6 +116,29 @@ Fork 本仓库到您的 GitHub 用户下，如图所示：
 
 1. 进入你 Fork 的 GitHub 仓库，点击 `Sync fork` 按钮
 2. 点击 `Update branch` 按钮，即可自动同步本仓库的最新代码
+
+### 使用 Netlify 部署
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Alice39s/kuma-mieru)
+
+1. 点击上方按钮，按提示授权 GitHub 并创建仓库；也可以先 Fork 本仓库，再在 <https://app.netlify.com/start> 导入
+2. 填写 `UPTIME_KUMA_URLS` 环境变量，其他变量见 [环境变量配置](#环境变量配置)
+3. 点击 `Deploy` 按钮开始部署
+
+仓库根目录的 `netlify.toml` 已配置构建命令 (`bun run build`) 与发布目录 (`.next`)，Netlify 会自动启用 Next.js 适配器，无需手动修改构建设置。
+
+> [!NOTE]
+> `UPTIME_KUMA_URLS` 等配置在构建时写入产物，修改环境变量后需要重新部署 (`Deploys` → `Trigger deploy`) 才会生效。
+
+> [!WARNING]
+> Netlify 的 Next.js 适配器 `@netlify/plugin-nextjs` 5.16.4 在打包 Node.js Proxy (`proxy.ts`) 时，可能报 `Could not patch functions config manifest file` 构建错误。遇到该错误时，请等待适配器发布修复版本后重新部署。
+
+### 使用 EdgeOne Pages 部署
+
+1. Fork 本仓库
+2. 登录 [EdgeOne Pages](https://pages.edgeone.ai)，选择导入 Git 仓库，并选中刚才 Fork 的仓库
+3. 框架预设选择 `Next.js`；仓库根目录的 `edgeone.json` 已配置安装命令 (`bun install --frozen-lockfile`) 与构建命令 (`bun run build`)
+4. 添加 `UPTIME_KUMA_URLS` 环境变量，点击开始部署
 
 ### 使用 Cloudflare Workers 部署
 

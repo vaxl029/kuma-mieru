@@ -41,6 +41,8 @@ Built with Next.js 16, TypeScript, and Recharts, this project enhances Uptime Ku
       - [2. Import to Vercel](#2-import-to-vercel)
       - [3. Configure Environment Variables](#3-configure-environment-variables)
       - [4. Update Repository](#4-update-repository)
+    - [Netlify Deployment](#netlify-deployment)
+    - [EdgeOne Pages Deployment](#edgeone-pages-deployment)
     - [Cloudflare Workers Deployment](#cloudflare-workers-deployment)
     - [Local Installation](#local-installation)
   - [Docker Deployment :whale: (Beta)](#docker-deployment-whale-beta)
@@ -108,6 +110,29 @@ Go to <https://vercel.com/new>, select **Import** to import the repository you j
 
 1. Enter your forked GitHub repository, click the `Sync fork` button.
 2. Click the `Update branch` button, and follow the prompts to automatically synchronize the latest code from this repository.
+
+### Netlify Deployment
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Alice39s/kuma-mieru)
+
+1. Click the button above, authorize GitHub, and create the repository. You can also fork this repository first and import it at <https://app.netlify.com/start>.
+2. Fill in the `UPTIME_KUMA_URLS` environment variable. See [Environment Variables](#environment-variables) for the other variables.
+3. Click the `Deploy` button to start the deployment.
+
+The `netlify.toml` file in the repository root sets the build command (`bun run build`) and the publish directory (`.next`). Netlify enables its Next.js adapter automatically, so the build settings need no manual changes.
+
+> [!NOTE]
+> `UPTIME_KUMA_URLS` and the related settings are written into the build output. After you change an environment variable, redeploy the site (`Deploys` → `Trigger deploy`) to apply it.
+
+> [!WARNING]
+> The Netlify Next.js adapter `@netlify/plugin-nextjs` 5.16.4 can fail with `Could not patch functions config manifest file` while it packages the Node.js Proxy (`proxy.ts`). If the build fails with this error, redeploy after the adapter publishes a fixed version.
+
+### EdgeOne Pages Deployment
+
+1. Fork this repository.
+2. Log in to [EdgeOne Pages](https://pages.edgeone.ai), choose to import a Git repository, and select your fork.
+3. Select the `Next.js` framework preset. The `edgeone.json` file in the repository root sets the install command (`bun install --frozen-lockfile`) and the build command (`bun run build`).
+4. Add the `UPTIME_KUMA_URLS` environment variable and start the deployment.
 
 ### Cloudflare Workers Deployment
 
