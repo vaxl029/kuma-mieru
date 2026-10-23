@@ -32,12 +32,12 @@ function decodeUnicodeEscapes(value: unknown): unknown {
         /\\([nrt\\])/g,
         (_, char: string) =>
           (
-            ({
+            {
               n: '\n',
               r: '\r',
               t: '\t',
               '\\': '\\',
-            }) as Record<string, string>
+            } as Record<string, string>
           )[char] || char
       )
 

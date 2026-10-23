@@ -81,7 +81,7 @@ export function StatusBlockIndicator({
         >
           {showHeader &&
             Object.entries(COLOR_SYSTEM)
-              .filter(([_, value]) => value.showInLegend)
+              .filter(([, value]) => value.showInLegend)
               .map(([key, value]) => (
                 <div key={key} className="flex items-center gap-1 text-xs">
                   <div className={clsx('w-1.5 h-1.5 rounded-full', value.bg.dark)} />
