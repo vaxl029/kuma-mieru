@@ -89,8 +89,8 @@ RUN apk add --no-cache curl dumb-init && \
 USER nextjs
 
 # 创建最小化的 package.json 只包含运行时依赖
-# 包括 serverExternalPackages 声明的包：sharp, cheerio
-# 以及 generate 脚本需要的：zod, json5, dotenv, chalk
+# 包括 serverExternalPackages 声明的包：sharp
+# 以及 generate 脚本需要的：cheerio, zod, json5, dotenv, chalk
 # tsx 用于运行 TypeScript 启动脚本（替代 Bun，避免 AVX2 指令集兼容性问题）
 RUN npm install --prefer-online --omit=dev sharp cheerio zod json5 dotenv chalk tsx
 

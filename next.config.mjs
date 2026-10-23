@@ -127,7 +127,7 @@ const productionConfig = {
     reactRemoveProperties: true,
   },
 
-  serverExternalPackages: ['sharp', 'cheerio'],
+  serverExternalPackages: ['sharp'],
 
   async headers() {
     const baseHeaders = [
