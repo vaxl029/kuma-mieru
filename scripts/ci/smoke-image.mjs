@@ -34,6 +34,12 @@ for (const [page, route, id] of [
   const monitor = await monitorResponse.json();
   assert.equal(monitor.success, true);
   assert.equal(monitor.monitorGroups[0].monitorList[0].id, id);
+  const heartbeats = monitor.data.heartbeatList[id];
+  assert.equal(heartbeats.length, 100, `${page}: all chart ranges need 100 samples`);
+  assert(
+    heartbeats.every(heartbeat => Number.isFinite(Date.parse(heartbeat.time))),
+    `${page}: heartbeat times must be parseable by the chart`
+  );
   const configResponse = await request(`/api/config?pageId=${page}`);
   assert.equal(configResponse.status, 200);
   const config = await configResponse.json();

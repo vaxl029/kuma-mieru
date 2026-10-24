@@ -16,10 +16,14 @@ const server = http.createServer((req, res) => {
   if (url.pathname.startsWith('/api/status-page/heartbeat/')) {
     return send({
       heartbeatList: {
-        [monitorId]: [
-          { status: 0, time: '2026-10-24 00:00:00', ping: 0 },
-          { status: 1, time: '2026-10-24 00:01:00', ping: 24 },
-        ],
+        [monitorId]: Array.from({ length: 100 }, (_, index) => ({
+          status: index === 0 ? 0 : 1,
+          time: new Date(Date.UTC(2026, 9, 24, 0, index))
+            .toISOString()
+            .slice(0, 19)
+            .replace('T', ' '),
+          ping: index === 0 ? 0 : 24,
+        })),
       },
       uptimeList: { [`${monitorId}_24`]: 0.99 },
     });

@@ -168,8 +168,8 @@ export default function AutoRefresh({ onRefresh, interval = 60000, children }: A
           'p-4 space-y-2 z-40'
         )}
       >
-        <div className="flex items-center gap-4 max-w-7xl mx-auto">
-          <div className="flex-1">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4 max-w-7xl mx-auto">
+          <div className="w-full sm:w-auto sm:flex-1 min-w-0">
             <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden transition-colors duration-300">
               <div
                 className={`h-full bg-linear-to-r from-blue-500 to-blue-400 transition-all duration-1000 
@@ -183,7 +183,7 @@ export default function AutoRefresh({ onRefresh, interval = 60000, children }: A
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="ml-auto flex items-center gap-2">
             <ControlButton isPaused={isPaused} onClick={handleTogglePause} />
             <RefreshButton isRefreshing={isRefreshing} onClick={handleManualRefresh}>
               {t('refreshNow')}
@@ -191,7 +191,7 @@ export default function AutoRefresh({ onRefresh, interval = 60000, children }: A
           </div>
         </div>
 
-        <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400 max-w-7xl mx-auto transition-colors duration-300">
+        <div className="flex flex-col sm:flex-row sm:justify-between gap-x-4 gap-y-1 text-sm text-gray-500 dark:text-gray-400 max-w-7xl mx-auto transition-colors duration-300">
           <div suppressHydrationWarning={true}>
             {t('lastTime', {
               time: format.dateTime(dayjs(lastRefreshTime).toDate(), {

@@ -99,23 +99,23 @@ export function MonitorCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="group h-full"
+      className="group h-full min-w-0"
       onClick={handleClick}
       whileHover={isHome ? { y: -3, transition: { duration: 0.2 } } : {}}
     >
       <Card
         className={clsx(
-          'h-full grid grid-rows-[auto_1fr]',
+          'h-full min-w-0 grid grid-cols-[minmax(0,1fr)] grid-rows-[auto_1fr]',
           isHome ? 'w-full' : 'w-full md:w-2/3 mx-auto',
           isHome && 'cursor-pointer hover:shadow-md transition-all'
         )}
       >
-        <CardHeader className="grid grid-cols-[1fr_auto] gap-4 items-start">
-          <div className="grid grid-rows-[auto_minmax(28px,auto)] gap-2 min-w-0 overflow-hidden">
+        <CardHeader className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto] gap-2 sm:gap-4 items-start">
+          <div className="grid grid-rows-[auto_auto] sm:grid-rows-[auto_minmax(28px,auto)] gap-2 min-w-0 overflow-hidden">
             <div className="flex items-center gap-2 w-full min-w-0">
               <StatusIcon className={clsx(statusVisual.iconClassName, 'h-5 w-5 ml-1 shrink-0')} />
               <Tooltip content={monitor.name} placement="top" delay={300}>
-                <h3 className="text-lg font-semibold truncate text-ellipsis max-w-36 md:max-w-40 lg:max-w-48">
+                <h3 className="min-w-0 text-lg font-semibold break-words sm:truncate sm:max-w-36 md:max-w-40 lg:max-w-48">
                   {monitor.name}
                 </h3>
               </Tooltip>
@@ -133,7 +133,7 @@ export function MonitorCard({
               )}
             </div>
           </div>
-          <div className="flex items-start gap-2">
+          <div className="flex items-start justify-between sm:justify-start gap-2">
             <div className={clsx('shrink-0', isHome ? '' : 'mr-4')}>
               <ResponsStats
                 value={uptimeData[0].value}
@@ -151,12 +151,12 @@ export function MonitorCard({
             )}
           </div>
         </CardHeader>
-        <CardBody className="grid grid-rows-[auto_auto_1fr] gap-4">
+        <CardBody className="min-w-0 grid grid-cols-[minmax(0,1fr)] grid-rows-[auto_auto_1fr] gap-4">
           <StatusBlockIndicator heartbeats={heartbeats} isHome={isHome} showHeader={true} />
 
           <Divider />
 
-          <div className="self-end w-full">
+          <div className="self-end w-full min-w-0">
             {!isSafari && (
               <MonitoringChart
                 heartbeats={heartbeats}

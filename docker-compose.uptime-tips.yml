@@ -1,7 +1,7 @@
 # Use a verified release digest for a deployment that must remain reproducible.
 services:
   kuma-mieru:
-    image: ghcr.io/vaxl029/kuma-mieru:1.7.6-custom.1
+    image: ghcr.io/vaxl029/kuma-mieru:1.7.6-custom.3
     container_name: kuma-mieru
     networks:
       - kuma_net

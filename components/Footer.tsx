@@ -23,7 +23,7 @@ export function Footer({ config, copyrightTitle = DEFAULT_SITE_TITLE }: FooterPr
           © {new Date().getFullYear()} {copyrightTitle}
         </div>
 
-        <div className="flex items-center gap-1 text-sm font-bold">
+        <div className="flex flex-wrap items-center justify-center gap-1 text-sm font-bold [&>*]:whitespace-nowrap">
           <span>Powered by</span>
           {showPoweredBy ? (
             <>

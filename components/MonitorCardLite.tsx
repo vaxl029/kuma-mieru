@@ -128,15 +128,7 @@ export function MonitorCardLite({
             </div>
           </div>
 
-          {/* 在大屏幕上显示状态块指示器 */}
-          <div className="hidden md:block">
-            <StatusBlockIndicator
-              heartbeats={heartbeats}
-              isHome={isHome}
-              className="mt-1"
-              showHeader={false}
-            />
-          </div>
+          <StatusBlockIndicator heartbeats={heartbeats} isHome={isHome} className="mt-2" />
         </CardBody>
       </Card>
     </motion.div>

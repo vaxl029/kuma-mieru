@@ -49,8 +49,8 @@ function SimplifiedChart({
   maxPing: number;
 }) {
   return (
-    <div className="w-full h-full" style={{ height }}>
-      <ResponsiveContainer width="100%" height={height}>
+    <div className="w-full min-w-0 h-full" style={{ height }}>
+      <ResponsiveContainer width="100%" height={height} minWidth={0}>
         <AreaChart
           data={data}
           margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
@@ -206,13 +206,18 @@ export function MonitoringChart({
   const chartHeight = typeof height === 'number' && height > 0 ? height : 200;
 
   return (
-    <div className="w-full mt-2" ref={chartContainerRef}>
-      <div className="mb-4 mt-3 items-center justify-center flex gap-2">
+    <div className="w-full min-w-0 mt-2" ref={chartContainerRef}>
+      <div className="mb-4 mt-3 min-w-0">
         <Tabs
           size="sm"
           selectedKey={selectedRange}
           onSelectionChange={handleRangeChange}
-          className="font-light text-sm"
+          className="w-full min-w-0 font-light text-sm"
+          classNames={{
+            tabList: 'grid w-full grid-cols-[repeat(auto-fit,minmax(4.5rem,1fr))]',
+            tab: 'min-w-0 px-1',
+            tabContent: 'whitespace-normal text-center',
+          }}
         >
           {availableRanges.map(range => (
             <Tab key={range.key} title={t('node.count', { count: range.count })} />
@@ -229,7 +234,7 @@ export function MonitoringChart({
             duration: 0.4,
             ease: [0.4, 0, 0.2, 1],
           }}
-          className="w-full"
+          className="w-full min-w-0"
           style={{ minHeight: chartHeight, height: chartHeight }}
         >
           {chartReady ? (

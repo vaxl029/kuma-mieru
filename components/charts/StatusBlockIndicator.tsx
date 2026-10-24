@@ -69,13 +69,13 @@ export function StatusBlockIndicator({
   }, [visibleHeartbeats, pingStats, t]);
 
   return (
-    <div className={clsx('relative mt-4 flex flex-col gap-1 min-w-0', className)}>
+    <div className={clsx('flex flex-col gap-2 min-w-0', className)}>
       {/* 图例和延迟统计 */}
-      <div className="absolute -top-5 flex w-full items-center justify-between">
+      <div className="flex w-full flex-wrap items-center justify-between gap-x-2 gap-y-1">
         {showHeader && <PingStats heartbeats={recentHeartbeats} isHome={isHome} />}
         <div
           className={clsx(
-            'flex items-center gap-2 text-xs text-foreground/80 dark:text-foreground/60',
+            'flex flex-wrap items-center gap-2 text-xs text-foreground/80 dark:text-foreground/60',
             isHome && 'ml-auto'
           )}
         >
@@ -92,7 +92,7 @@ export function StatusBlockIndicator({
       </div>
 
       {/* 状态块 */}
-      <div className="flex gap-px md:gap-0.5 mt-2 h-3 w-[98%] justify-end items-center mx-auto rounded-sm overflow-hidden">
+      <div className="flex gap-px md:gap-0.5 h-3 w-[98%] justify-end items-center mx-auto rounded-sm overflow-hidden">
         {heartbeatBlocks.map(({ key, tooltipContent, blockClassName }) => (
           <CustomTooltip key={key} content={tooltipContent}>
             <div className={blockClassName} />

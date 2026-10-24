@@ -26,11 +26,6 @@ interface ResolvedPageTab {
   isActive: boolean;
 }
 
-const HEALTH_DOT: Record<PageHealthStatus, string> = {
-  healthy: 'bg-success',
-  unavailable: 'bg-danger animate-pulse',
-};
-
 function PageTabItem({ tab }: { tab: ResolvedPageTab }) {
   const router = useRouter();
 
@@ -70,14 +65,6 @@ function PageTabItem({ tab }: { tab: ResolvedPageTab }) {
       >
         <span className="relative inline-flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-default-200 bg-default-100">
           <Image src={tab.icon} alt={tab.title} width={28} height={28} />
-          {/* health dot */}
-          <span
-            aria-hidden="true"
-            className={clsx(
-              'absolute bottom-0 right-0 h-2 w-2 rounded-full ring-1 ring-background translate-x-0.5 translate-y-0.5',
-              HEALTH_DOT[tab.health]
-            )}
-          />
         </span>
         <span className="flex min-w-0 flex-col text-left">
           <span className="truncate font-medium text-sm" title={tab.title}>

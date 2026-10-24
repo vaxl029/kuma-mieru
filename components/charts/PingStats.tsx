@@ -59,7 +59,7 @@ export function PingStats({ heartbeats, isHome = false }: PingStatsProps) {
   if (!stats) return null;
 
   return (
-    <div className="hide-ping-stats ml-1 flex items-center gap-1.5 text-xs text-foreground/80 dark:text-foreground/60">
+    <div className="ml-1 flex flex-wrap items-center gap-1.5 text-xs text-foreground/80 dark:text-foreground/60">
       <SinglePingStat label={PING_LABELS.lt} value={stats.latestPing} isHome={isHome} t={t} />
       <SinglePingStat label={PING_LABELS.av} value={stats.avgPing} isHome={isHome} t={t} />
       {!isHome && (

@@ -1,12 +1,6 @@
 @import 'tailwindcss';
 @config "../tailwind.config.js";
 
-@media (max-width: 1024px) {
-  .hide-ping-stats {
-    display: none;
-  }
-}
-
 @keyframes fade-in-soft {
   from {
     opacity: 0;
