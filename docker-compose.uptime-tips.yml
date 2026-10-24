@@ -1,0 +1,31 @@
+# Use a verified release digest for a deployment that must remain reproducible.
+services:
+  kuma-mieru:
+    image: ghcr.io/vaxl029/kuma-mieru:1.7.6-custom.1
+    container_name: kuma-mieru
+    networks:
+      - kuma_net
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:46172:3000"
+    environment:
+      NODE_ENV: production
+      UPTIME_KUMA_BASE_URL: http://uptime-kuma:3001
+      PAGE_ID: default,cert,ipc
+      FEATURE_EDIT_THIS_PAGE: "false"
+      FEATURE_SHOW_STAR_BUTTON: "false"
+      FEATURE_TITLE: Uptime.Tips
+      FEATURE_DESCRIPTION: ""
+      FEATURE_ICON: /icon.svg
+      TIMEZONE: UTC
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
+    tmpfs:
+      - /tmp
+networks:
+  kuma_net:
+    external: true

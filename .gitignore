@@ -60,3 +60,6 @@ dist/
 .agents/
 .claude/
 *-lock.json
+!CUSTOMIZATIONS.md
+!DEPLOYMENTS.md
+!docs/MAINTENANCE.md
