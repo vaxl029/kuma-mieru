@@ -21,6 +21,7 @@ export interface ProvidersProps {
   themeProps?: ThemeProviderProps;
   locale: string;
   messages: AbstractIntlMessages;
+  timeZone: string;
 }
 
 declare module '@react-types/shared' {
@@ -29,9 +30,8 @@ declare module '@react-types/shared' {
   }
 }
 
-export function Providers({ children, themeProps, locale, messages }: ProvidersProps) {
+export function Providers({ children, themeProps, locale, messages, timeZone }: ProvidersProps) {
   const router = useRouter();
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages} timeZone={timeZone}>

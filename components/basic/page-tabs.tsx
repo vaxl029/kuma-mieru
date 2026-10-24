@@ -113,7 +113,10 @@ export function PageTabs({ tabs: providedTabs }: PageTabsProps) {
     const metaFromPreload = providedMeta.get(id);
     const fallbackSiteMeta = pageConfig.pages.find(page => page.id === id)?.siteMeta;
 
-    const title = metaFromPreload?.title?.trim() || fallbackSiteMeta?.title?.trim() || id;
+    const title =
+      id === pageConfig.defaultPageId
+        ? 'Home'
+        : metaFromPreload?.title?.trim() || fallbackSiteMeta?.title?.trim() || id;
     const description =
       metaFromPreload?.description?.trim() || fallbackSiteMeta?.description?.trim();
     const icon = buildIconProxyUrl(id);

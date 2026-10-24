@@ -1,5 +1,5 @@
-export const DEFAULT_SITE_TITLE = 'Kuma Mieru';
-export const DEFAULT_SITE_DESCRIPTION = 'A beautiful and modern uptime monitoring dashboard';
+export const DEFAULT_SITE_TITLE = 'Uptime.Tips';
+export const DEFAULT_SITE_DESCRIPTION = 'Uptime.Tips';
 export const DEFAULT_SITE_ICON = '/icon.svg';
 
 export const DEFAULT_SITE_META = {

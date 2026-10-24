@@ -141,7 +141,7 @@ export function SystemStatusAlert() {
               ) : (
                 <>
                   {getStatusText()}
-                  <span className="text-white/90 text-sm md:text-base ml-2">{`(${affectedMonitors}/${totalMonitors})`}</span>
+                  <span className="text-white/90 text-sm md:text-base ml-2">{`(${statusCounts.up}/${totalMonitors})`}</span>
                 </>
               )}
             </h1>

@@ -14,13 +14,11 @@ import {
 } from '@heroui/react';
 import { link as linkStyles } from '@heroui/theme';
 import clsx from 'clsx';
-import Image from 'next/image';
 import NextLink from 'next/link';
 import { useCallback, useEffect, useRef } from 'react';
 
 import { GithubIcon, SearchIcon } from '@/components/basic/icons';
 import { ThemeSwitch } from '@/components/basic/theme-switch';
-import { buildIconProxyUrl } from '@/utils/icon-proxy';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -118,7 +116,6 @@ export const Navbar = () => {
     </Button>
   );
 
-  const getIconUrl = () => buildIconProxyUrl(pageConfig.pageId) || '/icon.svg';
   const navItems = [
     {
       label: 'page.main',
@@ -139,25 +136,14 @@ export const Navbar = () => {
   return (
     <HeroUINavbar maxWidth="xl" position="static">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href={homeHref}>
-            <Image
-              src={getIconUrl() || '/icon.svg'}
-              alt={`${resolvedTitle} logo`}
-              width={34}
-              height={34}
-            />
-            <p className="font-bold text-inherit">{resolvedTitle}</p>
-          </NextLink>
-        </NavbarBrand>
         {navItems.map((item, index) => {
-          const targetHref = item.href === '/' ? homeHref : item.href;
+          const targetHref = item.href;
           return (
             <NavbarItem key={item.href} className={clsx('hidden lg:flex', index === 0 && 'ml-2')}>
               <NextLink
                 className={clsx(
                   linkStyles({ color: 'foreground' }),
-                  'data-[active=true]:text-primary data-[active=true]:font-medium'
+                  'font-bold data-[active=true]:text-primary data-[active=true]:font-medium'
                 )}
                 color="foreground"
                 href={targetHref}
@@ -168,6 +154,20 @@ export const Navbar = () => {
             </NavbarItem>
           );
         })}
+        {pageConfig.pageId !== pageConfig.defaultPageId && (
+          <NavbarBrand className="gap-3 max-w-fit hidden lg:flex">
+            <NextLink className="flex justify-start items-center gap-1" href={homeHref}>
+              <p className="font-bold text-inherit">{resolvedTitle}</p>
+            </NextLink>
+          </NavbarBrand>
+        )}
+        <NavbarBrand className="gap-3 max-w-fit flex lg:hidden">
+          <NextLink className="flex justify-start items-center gap-1" href={homeHref}>
+            <p className="font-bold text-inherit">
+              {pageConfig.pageId === pageConfig.defaultPageId ? 'Home' : resolvedTitle}
+            </p>
+          </NextLink>
+        </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex basis-1/5 sm:basis-full" justify="end">
@@ -177,7 +177,7 @@ export const Navbar = () => {
         <NavbarItem>
           <I18NSwitch />
         </NavbarItem>
-        <NavbarItem className="hidden lg:block">
+        <NavbarItem className="hidden">
           <div className="flex flex-col">{searchInput}</div>
         </NavbarItem>
         <NavbarItem className="hidden sm:block">
@@ -217,7 +217,7 @@ export const Navbar = () => {
         <div className="flex flex-col gap-4">{searchInput}</div>
         <div className="mx-4 mt-4 flex flex-col gap-2" aria-label={t('navbar.mobileNav')}>
           {navItems.map((item, index) => {
-            const targetHref = item.href === '/' ? homeHref : item.href;
+            const targetHref = item.href;
 
             return (
               <Link

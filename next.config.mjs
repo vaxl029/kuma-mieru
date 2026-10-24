@@ -70,6 +70,7 @@ const baseConfig = {
   reactStrictMode: true,
 
   images: {
+    unoptimized: process.env.IMAGE_UNOPTIMIZED === 'true',
     remotePatterns: getImageRemotePatterns(),
     localPatterns: [
       {

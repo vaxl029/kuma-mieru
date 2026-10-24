@@ -8,8 +8,6 @@ import { usePageConfig } from '@/components/context/PageConfigContext';
 import { useConfig } from '@/components/utils/swr';
 import type { SiteConfig } from '@/types/config';
 import type { PageTabMeta } from '@/types/page';
-import { useTheme } from 'next-themes';
-import { useEffect } from 'react';
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -18,22 +16,14 @@ interface AppShellProps {
 }
 
 export function AppShell({ children, footerConfig, pageTabs }: AppShellProps) {
-  const { pageId } = usePageConfig();
-  const { setTheme } = useTheme();
+  const { pageId, defaultPageId, pages } = usePageConfig();
+  const copyrightTitle = pages.find(page => page.id === defaultPageId)?.siteMeta.title;
   const { config: liveConfig } = useConfig();
   const resolvedFooterConfig = liveConfig?.config ?? footerConfig;
   const resolvedPageTabs = liveConfig?.pageTabs ?? pageTabs;
   const failedTabs = (resolvedPageTabs ?? []).filter(tab => tab.health === 'unavailable');
   const hasPartialFailure =
     failedTabs.length > 0 && failedTabs.length < (resolvedPageTabs?.length ?? 0);
-
-  useEffect(() => {
-    if (!liveConfig?.config.theme || window.localStorage.getItem('theme')) {
-      return;
-    }
-
-    setTheme(liveConfig.config.theme);
-  }, [liveConfig?.config.theme, setTheme]);
 
   return (
     <div className="relative flex flex-col min-h-screen">
@@ -56,7 +46,7 @@ export function AppShell({ children, footerConfig, pageTabs }: AppShellProps) {
       <main key={pageId} className="container mx-auto max-w-7xl pt-4 px-6 grow fade-in-soft">
         {children}
       </main>
-      <Footer config={resolvedFooterConfig} />
+      <Footer config={resolvedFooterConfig} copyrightTitle={copyrightTitle} />
     </div>
   );
 }

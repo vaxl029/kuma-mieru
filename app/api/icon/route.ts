@@ -81,9 +81,13 @@ export async function GET(request: Request) {
   }
 
   try {
+    const configuredIcon = normalizeIconValue(pageConfig.siteMeta.icon);
+    // The existing deployment sets FEATURE_ICON=/icon.svg as a fallback.
+    // Keep each Kuma page's uploaded icon instead of masking all page icons.
     const icon =
-      normalizeIconValue(pageConfig.siteMeta.icon) ??
-      normalizeIconValue(await getUpstreamIconUrl(pageConfig));
+      configuredIcon && configuredIcon !== FALLBACK_ICON
+        ? configuredIcon
+        : normalizeIconValue(await getUpstreamIconUrl(pageConfig));
     if (!icon) {
       return fallback();
     }

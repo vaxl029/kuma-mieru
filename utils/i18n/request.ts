@@ -15,6 +15,7 @@ export default getRequestConfig(async () => {
   }
   return {
     locale,
+    timeZone: process.env.TIMEZONE || 'UTC',
     formats: {
       dateTime: {
         normal: {
